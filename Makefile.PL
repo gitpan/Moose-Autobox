@@ -6,6 +6,7 @@ WriteMakefile
           'VERSION_FROM' => 'lib/Moose/Autobox.pm',
           'PREREQ_PM' => {
                            'Moose' => '0.09_02',
+                           'Perl6::Junction' => '1.10',
                            'Test::Exception' => '0.21',
                            'Test::More' => '0.62',
                            'autobox' => '1.03'

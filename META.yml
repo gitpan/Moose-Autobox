@@ -1,32 +1,24 @@
 ---
 name: Moose-Autobox
-version: 0.01
+version: 0.02
 author:
   - 'Stevan Little E<lt>stevan@iinteractive.comE<gt>'
 abstract: Autoboxed for her pleasure
 license: perl
 requires:
   Moose: 0.09_02
+  Perl6::Junction: 1.10
   autobox: 1.03
 build_requires:
   Test::Exception: 0.21
   Test::More: 0.62
 provides:
-  ARRAY:
-    file: lib/Moose/Autobox.pm
-    version: 0.01
-  CODE:
-    file: lib/Moose/Autobox.pm
-    version: 0.01
-  HASH:
-    file: lib/Moose/Autobox.pm
-    version: 0.01
   Moose::Autobox:
     file: lib/Moose/Autobox.pm
-    version: 0.01
+    version: 0.02
   Moose::Autobox::Array:
     file: lib/Moose/Autobox/Array.pm
-    version: 0.01
+    version: 0.02
   Moose::Autobox::Code:
     file: lib/Moose/Autobox/Code.pm
     version: 0.01
@@ -50,7 +42,7 @@ provides:
     version: 0.01
   Moose::Autobox::Ref:
     file: lib/Moose/Autobox/Ref.pm
-    version: 0.01
+    version: 0.02
   Moose::Autobox::Scalar:
     file: lib/Moose/Autobox/Scalar.pm
     version: 0.01
@@ -62,8 +54,5 @@ provides:
     version: 0.01
   Moose::Autobox::Value:
     file: lib/Moose/Autobox/Value.pm
-    version: 0.01
-  SCALAR:
-    file: lib/Moose/Autobox.pm
     version: 0.01
 generated_by: Module::Build version 0.2611
