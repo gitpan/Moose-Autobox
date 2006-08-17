@@ -1,9 +1,9 @@
 package Moose::Autobox::Array;
 use Moose::Role 'with';
 use Perl6::Junction;
-use autobox;
+use Moose::Autobox;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 with 'Moose::Autobox::Ref',
      'Moose::Autobox::List',
@@ -152,7 +152,6 @@ Moose::Autobox::Array - the Array role
 =head1 SYNOPOSIS
 
   use Moose::Autobox;
-  use autobox;
     
   [ 1..5 ]->isa('ARRAY'); # true
   [ a..z ]->does('Moose::Autobox::Array'); # true

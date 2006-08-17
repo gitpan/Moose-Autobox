@@ -19,7 +19,7 @@ This comes from one of the examples in the Pugs distro.
 {
     package Units::Bytes;
     use Moose::Role;
-    use autobox;
+    use Moose::Autobox;
     
     sub bytes     { $_[0]                   }    
     sub kilobytes { $_[0] * 1024            }
@@ -37,18 +37,14 @@ This comes from one of the examples in the Pugs distro.
     }
 }
 
-{
-    package SCALAR;
-    use Moose;
-    with 'Units::Bytes';
-}
+Moose::Autobox->mixin_additional_role(SCALAR => 'Units::Bytes');
 
 sub testing_bytes {
     ::dies_ok { 10->bytes } '... cannot do the autoboxing lexically';
 }
 
 {
-    use autobox;
+    use Moose::Autobox;
 
     is(5->bytes,     5,             '... got 5 bytes');
     is(5->kilobytes, 5120,          '... got 5 kilobytes');

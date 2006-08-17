@@ -1,8 +1,8 @@
 package Moose::Autobox::Code;
 use Moose::Role 'with';
-use autobox;
+use Moose::Autobox;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 with 'Moose::Autobox::Ref';
 
@@ -32,11 +32,17 @@ sub conjoin {
 	return sub { $f->(@_) && $f2->(@_) }    
 }
 
-#sub dump {
-    #my ($self) = @_;
-    #require Data::Dump::Streamer;
-    #return Data::Dump::Streamer::Dump($self)->Out();
-#}
+# fixed point combinators
+
+sub u {
+    my $f = shift;
+    sub { $f->($f, @_) };
+}
+
+sub y {
+    my $f = shift;
+    (sub { my $h = shift; sub { $f->(($h->u)->())->(@_) } }->u)->();
+}
 
 1;
 
@@ -51,12 +57,25 @@ Moose::Autobox::Code - the Code role
 =head1 SYNOPOSIS
 
   use Moose::Autobox;
-  use autobox;
   
   my $adder = sub { $_[0] + $_[1] };
   my $add_2 = $adder->curry(2);
   
   $add_2->(2); # returns 4
+  
+  # create a recursive subroutine 
+  # using the Y combinator
+  *factorial = sub {
+      my $f = shift;
+      sub {
+          my $n = shift;
+          return 1 if $n < 2;
+          return $n * $f->($n - 1);
+      }
+  }->y;
+  
+  factorial(10) # returns 3628800
+  
 
 =head1 DESCRIPTION
 
@@ -79,11 +98,29 @@ This is a role to describe operations on the Code type.
 This will take a list of C<@subs> and compose them all into a single 
 subroutine where the output of one sub will be the input of another. 
 
+=item B<y>
+
+This implements the Y combinator.
+
+=item B<u>
+
+This implements the U combinator.
+
 =back
 
 =over 4
 
 =item B<meta>
+
+=back
+
+=head1 SEE ALSO
+
+=over 4
+
+=item L<http://en.wikipedia.org/wiki/Fixed_point_combinator>
+
+=item L<http://blade.nagaokaut.ac.jp/cgi-bin/scat.rb/ruby/ruby-talk/20469>
 
 =back
 

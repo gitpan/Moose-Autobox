@@ -7,49 +7,62 @@ use warnings;
 use Carp        qw(confess);
 use Scalar::Util ();
 
-our $VERSION = '0.02';
-            
+our $VERSION = '0.03';
+
+use base 'autobox';
+
+use Moose::Autobox::Undef;
+
 sub import {
-    eval q|
-package # hide from PAUSE
-    SCALAR;
-# NOTE:
-# this doesnt make sense, but 
-# I need to prevent Moose from 
-# assiging to @ISA
-use base 'UNIVERSAL';
-use Moose;
-with 'Moose::Autobox::Scalar';
+    (shift)->SUPER::import(
+        DEFAULT => 'Moose::Autobox::',
+        UNDEF   => 'Moose::Autobox::Undef',
+    );
+}
 
-*does = \&Moose::Object::does;
+sub mixin_additional_role {
+    my ($class, $type, $role) = @_;
+    ($type =~ /SCALAR|ARRAY|HASH|CODE/)
+        || confess "Can only add additional roles to SCALAR, ARRAY, HASH or CODE";
+    ('Moose::Autobox::' . $type)->meta->_apply_all_roles($role);
+}
 
-package # hide from PAUSE
-    ARRAY;
-use base 'UNIVERSAL';
-use Moose;
-with 'Moose::Autobox::Array';
+{
+                        
+    package Moose::Autobox::SCALAR;
+    # NOTE:
+    # this doesnt make sense, but 
+    # I need to prevent Moose from 
+    # assiging to @ISA
+    use base 'UNIVERSAL';
+    use Moose;
+    with 'Moose::Autobox::Scalar';
 
-*does = \&Moose::Object::does;
+    *does = \&Moose::Object::does;
 
-package # hide from PAUSE
-    HASH;
-use base 'UNIVERSAL';
-use Moose;
-with 'Moose::Autobox::Hash';
+    package Moose::Autobox::ARRAY;
+    use base 'UNIVERSAL';
+    use Moose;
+    with 'Moose::Autobox::Array';
 
-*does = \&Moose::Object::does;
+    *does = \&Moose::Object::does;
 
-package # hide from PAUSE 
-    CODE;
-use base 'UNIVERSAL';
-use Moose;
-with 'Moose::Autobox::Code';  
+    package Moose::Autobox::HASH;
+    use base 'UNIVERSAL';
+    use Moose;
+    with 'Moose::Autobox::Hash';
 
-*does = \&Moose::Object::does;
-    |;
-    confess 'Could not create autobox packages because - ' . $@ if $@;
-}               
+    *does = \&Moose::Object::does;
 
+    package Moose::Autobox::CODE;
+    use base 'UNIVERSAL';
+    use Moose;
+    with 'Moose::Autobox::Code';  
+
+    *does = \&Moose::Object::does;            
+ 
+} 
+                 
 1;
 
 __END__
@@ -58,12 +71,11 @@ __END__
 
 =head1 NAME 
 
-Moose::Autobox - Autoboxed for her pleasure
+Moose::Autobox - Ruby ain't got nothin on us
 
 =head1 SYNOPOSIS
 
   use Moose::Autobox;
-  use autobox;
   
   print 'Print squares from 1 to 10 : ';
   print [ 1 .. 10 ]->map(sub { $_ * $_ })->join(', ');
@@ -107,26 +119,19 @@ possible. This may or may not be possible, depending on how well
 L<autobox> works out. At this point, I have high hopes for things
 but only time (and more tests and code) will tell.
 
-=head1 ROLES
+=head1 METHODS
 
-This is a rough diagram of the roles involved to get our 4 
-autoboxed types (SCALAR, ARRAY, HASH & CODE). 
-                                                          
-  +------------------------+-------------------------------+
-  |  Identity              |  Behavioral                   |
-  +------------------------+-------------------------------+
-  |  Item                  |                               |
-  |      Undef             |                               |
-  |      Defined           |                               |
-  |          Scalar*     <-|- String, Number <--+          |
-  |          Ref           |                    |-- Value  |
-  |              Array*  <-|- List <------------+          |
-  |              Hash*     |                               |
-  |              Code*     |                               |
-  |                        |                               |
-  +------------------------+-------------------------------+
-                                                          
-  * indicates actual autoboxed types
+=over 4
+
+=item B<mixin_additional_role ($type, $role)>
+
+This will mixin an additonal C<$role> into a certain C<$type>. The 
+types can be SCALAR, ARRAY, HASH or CODE.
+
+This can be used to add additional methods to the types, see the 
+F<examples/units/> directory for some examples.
+
+=back
 
 =head1 TODO
 
@@ -137,14 +142,6 @@ autoboxed types (SCALAR, ARRAY, HASH & CODE).
 =item More tests
 
 =back
-  
-=head1 NOTES  
-  
-  - String, Number & List are currently the only 'Value's.
-  
-  - Indexed is pretty much an interface, we probably will 
-    need more of these (see Smalltalk Collection Trait 
-    Refactoring)
   
 =head1 BUGS
 

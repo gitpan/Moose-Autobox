@@ -6,8 +6,6 @@ use warnings;
 use Moose::Autobox;
 use Moose::Autobox::Undef;
 
-use autobox UNDEF => 'Moose::Autobox::Undef';
-
 sub print_board {
     my ($b) = @_;
     my $count = 0;
@@ -69,7 +67,7 @@ while ($board->any eq '.') {
 
 =head1 NAME
 
-tic_tac_toe.p6 - Tic-Tac-Toe
+tic_tac_toe.pl - Tic-Tac-Toe
 
 =head1 DESCRIPTION
 

@@ -3,14 +3,13 @@
 use strict;
 use warnings;
 
-use Test::More tests => 56;
+use Test::More tests => 55;
 
 BEGIN {
     use_ok('Moose::Autobox');
-    use_ok('Moose::Autobox::Undef');
 }
 
-use autobox UNDEF => 'Moose::Autobox::Undef';
+use Moose::Autobox;
 
 # SCALAR & UNDEF
 

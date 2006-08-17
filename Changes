@@ -1,6 +1,21 @@
 Revision history for Perl extension Moose::Autobox
 
-0.02 
+0.03 Thurs. Aug 17, 2006
+
+    * Moose::Autobox 
+      - we now inherit from autobox, now we don't have to 
+        do that ugly eval thing or manually load autobox  
+        when we want to use this module.
+      - added &mixin_additional_role to allow mixing in of 
+        additional functionality (see examples/unit/*)
+
+    * Moose::Autobox::Code
+      - added the Y and U combinators
+
+    + added new examples for units
+      - ported from the Pugs examples/units directory
+
+0.02 Sat. June 24, 2006
     - fixed Moose::Autobox so that PAUSE won't try to 
       index SCALAR, ARRAY, HASH and CODE.
       
