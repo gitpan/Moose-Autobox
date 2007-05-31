@@ -139,6 +139,11 @@ sub one {
     return Perl6::Junction::One->one(@$array);
 }
 
+## Print
+
+sub print { CORE::print @{$_[0]} }
+sub say   { CORE::print @{$_[0]}, "\n" }
+
 1;
 
 __END__
@@ -245,6 +250,10 @@ This is a role to describe operations on the Array type.
 
 =item B<meta>
 
+=item B<print>
+
+=item B<say>
+
 =back
 
 =head1 BUGS
@@ -259,7 +268,7 @@ Stevan Little E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2006 by Infinity Interactive, Inc.
+Copyright 2006-2007 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 

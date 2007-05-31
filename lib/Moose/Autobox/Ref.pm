@@ -1,15 +1,9 @@
 package Moose::Autobox::Ref;     
 use Moose::Role 'with';
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 with 'Moose::Autobox::Defined';
-
-sub dump {
-    my $self = shift;
-    require Data::Dumper;
-    return Data::Dumper::Dumper($self);
-}
 
 1;
 
@@ -31,8 +25,6 @@ This is a role to describes a reference value.
 
 =item B<meta>
 
-=item B<dump>
-
 =back
 
 =head1 BUGS
@@ -47,7 +39,7 @@ Stevan Little E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2006 by Infinity Interactive, Inc.
+Copyright 2006-2007 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 

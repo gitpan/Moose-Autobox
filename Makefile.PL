@@ -2,16 +2,17 @@
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
+          'PL_FILES' => {},
+          'INSTALLDIRS' => 'site',
           'NAME' => 'Moose::Autobox',
+          'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/Moose/Autobox.pm',
           'PREREQ_PM' => {
-                           'Moose' => '0.11',
-                           'Perl6::Junction' => '1.10',
-                           'Test::Exception' => '0.21',
                            'Test::More' => '0.62',
-                           'autobox' => '1.03'
-                         },
-          'INSTALLDIRS' => 'site',
-          'PL_FILES' => {}
+                           'Test::Exception' => '0.21',
+                           'autobox' => '1.03',
+                           'Perl6::Junction' => '1.10',
+                           'Moose' => '0.11'
+                         }
         )
 ;

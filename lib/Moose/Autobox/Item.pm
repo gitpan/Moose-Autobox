@@ -1,9 +1,17 @@
 package Moose::Autobox::Item;     
 use Moose::Role 'requires';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 requires 'defined';
+
+sub dump {
+    my $self = shift;
+    require Data::Dumper;
+    return Data::Dumper::Dumper($self);
+}
+
+*perl = \&dump;
 
 1;
 
@@ -24,6 +32,18 @@ This is the root of our role hierarchy.
 =over 4
 
 =item B<meta>
+
+=item B<dump>
+
+Calls Data::Dumper::Dumper.
+
+=item B<perl>
+
+Same as B<dump>. For symmetry with Perl6's .perl method.
+
+Like &print with newline.
+
+=item B<print2>
 
 =back
 
@@ -47,7 +67,7 @@ Stevan Little E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2006 by Infinity Interactive, Inc.
+Copyright 2006-2007 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 

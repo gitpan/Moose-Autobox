@@ -1,7 +1,9 @@
 package Moose::Autobox::Hash;
 use Moose::Role 'with';
 
-our $VERSION = '0.01';
+use Carp qw(croak);
+
+our $VERSION = '0.02';
 
 with 'Moose::Autobox::Ref',
      'Moose::Autobox::Indexed';
@@ -9,6 +11,13 @@ with 'Moose::Autobox::Ref',
 sub delete { 
     my ($hash, $key) = @_;
     CORE::delete $hash->{$key}; 
+}
+
+sub merge {
+    my ($left, $right) = @_;
+    croak "You must pass a hashref as argument to merge"
+        unless ref $right eq 'HASH';
+    return { %$left, %$right };
 }
 
 # ::Indexed implementation
@@ -43,6 +52,9 @@ sub kv {
     [ CORE::map { [ $_, $hash->{$_} ] } CORE::keys %$hash ];    
 }
 
+sub print   { CORE::print %{$_[0]} }
+sub say     { CORE::print %{$_[0]}, "\n" }
+
 1;
 
 __END__
@@ -69,6 +81,11 @@ This is a role to describes a Hash value.
 
 =item B<delete>
 
+=item B<merge>
+
+Takes a hashref and returns a new hashref with right precedence
+shallow merging.
+
 =back
 
 =head2 Indexed implementation
@@ -93,6 +110,10 @@ This is a role to describes a Hash value.
 
 =item B<meta>
 
+=item B<print>
+
+=item B<say>
+
 =back
 
 =head1 BUGS
@@ -107,7 +128,7 @@ Stevan Little E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2006 by Infinity Interactive, Inc.
+Copyright 2006-2007 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 
@@ -115,3 +136,4 @@ This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
 =cut
+

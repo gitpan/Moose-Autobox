@@ -6,6 +6,8 @@ our $VERSION = '0.01';
 with 'Moose::Autobox::String',
      'Moose::Autobox::Number';     
      
+sub print { CORE::print $_[0] }
+sub say   { CORE::print $_[0], "\n" }
 1;
 
 __END__
@@ -27,6 +29,10 @@ as the combination (union sort of) of a String and a Number.
 
 =item B<meta>
 
+=item B<print>
+
+=item B<say>
+
 =back
 
 =head1 BUGS
@@ -41,7 +47,7 @@ Stevan Little E<lt>stevan@iinteractive.comE<gt>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2006 by Infinity Interactive, Inc.
+Copyright 2006-2007 by Infinity Interactive, Inc.
 
 L<http://www.iinteractive.com>
 
