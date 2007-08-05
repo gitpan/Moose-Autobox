@@ -1,6 +1,6 @@
 ---
 name: Moose-Autobox
-version: 0.04
+version: 0.05
 author:
   - 'Stevan Little E<lt>stevan@iinteractive.comE<gt>'
 abstract: Ruby ain't got nothin on us
@@ -17,7 +17,7 @@ build_requires:
 provides:
   Moose::Autobox:
     file: lib/Moose/Autobox.pm
-    version: 0.04
+    version: 0.05
   Moose::Autobox::ARRAY:
     file: lib/Moose/Autobox.pm
   Moose::Autobox::Array:
