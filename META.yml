@@ -1,23 +1,23 @@
 ---
 name: Moose-Autobox
-version: 0.05
+version: 0.06
 author:
   - 'Stevan Little E<lt>stevan@iinteractive.comE<gt>'
-abstract: Ruby ain't got nothin on us
+abstract: Autoboxed wrappers for Native Perl datatypes
 license: perl
 resources:
   license: http://dev.perl.org/licenses/
 requires:
-  Moose: 0.11
+  Moose: 0.34
   Perl6::Junction: 1.10
-  autobox: 1.03
+  autobox: 1.22
 build_requires:
   Test::Exception: 0.21
   Test::More: 0.62
 provides:
   Moose::Autobox:
     file: lib/Moose/Autobox.pm
-    version: 0.05
+    version: 0.06
   Moose::Autobox::ARRAY:
     file: lib/Moose/Autobox.pm
   Moose::Autobox::Array:
@@ -65,7 +65,7 @@ provides:
   Moose::Autobox::Value:
     file: lib/Moose/Autobox/Value.pm
     version: 0.01
-generated_by: Module::Build version 0.2805
+generated_by: Module::Build version 0.2808
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
   version: 1.2
