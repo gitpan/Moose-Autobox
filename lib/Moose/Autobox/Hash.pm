@@ -1,9 +1,7 @@
 package Moose::Autobox::Hash;
 use Moose::Role 'with';
 
-use Carp qw(croak);
-
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 with 'Moose::Autobox::Ref',
      'Moose::Autobox::Indexed';
@@ -15,9 +13,14 @@ sub delete {
 
 sub merge {
     my ($left, $right) = @_;
-    croak "You must pass a hashref as argument to merge"
+    Carp::confess "You must pass a hashref as argument to merge"
         unless ref $right eq 'HASH';
     return { %$left, %$right };
+}
+
+sub hslice {
+    my ($hash, $keys) = @_;
+    return { map { $_ => $hash->{$_} } @$keys };
 }
 
 # ::Indexed implementation
@@ -51,6 +54,11 @@ sub kv {
     my ($hash) = @_;    
     [ CORE::map { [ $_, $hash->{$_} ] } CORE::keys %$hash ];    
 }
+
+sub slice {
+    my ($hash, $keys) = @_;
+    return [ @{$hash}{@$keys} ];
+};
 
 sub print   { CORE::print %{$_[0]} }
 sub say     { CORE::print %{$_[0]}, "\n" }
@@ -86,6 +94,10 @@ This is a role to describes a Hash value.
 Takes a hashref and returns a new hashref with right precedence
 shallow merging.
 
+=item B<hslice>
+
+Slices a hash but returns the keys and values as a new hashref.
+
 =back
 
 =head2 Indexed implementation
@@ -103,6 +115,8 @@ shallow merging.
 =item B<values>
 
 =item B<kv>
+
+=item B<slice>
 
 =back
 

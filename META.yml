@@ -1,71 +1,24 @@
----
-name: Moose-Autobox
-version: 0.06
-author:
-  - 'Stevan Little E<lt>stevan@iinteractive.comE<gt>'
-abstract: Autoboxed wrappers for Native Perl datatypes
+--- 
+abstract: "Autoboxed wrappers for Native Perl datatypes "
+author: 
+  - Stevan Little <stevan@iinteractive.com>
+build_requires: 
+  Test::Exception: 0.21
+  Test::More: 0.62
+distribution_type: module
+generated_by: Module::Install version 0.68
 license: perl
-resources:
-  license: http://dev.perl.org/licenses/
-requires:
+meta-spec: 
+  url: http://module-build.sourceforge.net/META-spec-v1.3.html
+  version: 1.3
+name: Moose-Autobox
+no_index: 
+  directory: 
+    - inc
+    - t
+requires: 
   Moose: 0.34
   Perl6::Junction: 1.10
   autobox: 1.22
-build_requires:
-  Test::Exception: 0.21
-  Test::More: 0.62
-provides:
-  Moose::Autobox:
-    file: lib/Moose/Autobox.pm
-    version: 0.06
-  Moose::Autobox::ARRAY:
-    file: lib/Moose/Autobox.pm
-  Moose::Autobox::Array:
-    file: lib/Moose/Autobox/Array.pm
-    version: 0.03
-  Moose::Autobox::CODE:
-    file: lib/Moose/Autobox.pm
-  Moose::Autobox::Code:
-    file: lib/Moose/Autobox/Code.pm
-    version: 0.02
-  Moose::Autobox::Defined:
-    file: lib/Moose/Autobox/Defined.pm
-    version: 0.01
-  Moose::Autobox::HASH:
-    file: lib/Moose/Autobox.pm
-  Moose::Autobox::Hash:
-    file: lib/Moose/Autobox/Hash.pm
-    version: 0.02
-  Moose::Autobox::Indexed:
-    file: lib/Moose/Autobox/Indexed.pm
-    version: 0.01
-  Moose::Autobox::Item:
-    file: lib/Moose/Autobox/Item.pm
-    version: 0.02
-  Moose::Autobox::List:
-    file: lib/Moose/Autobox/List.pm
-    version: 0.02
-  Moose::Autobox::Number:
-    file: lib/Moose/Autobox/Number.pm
-    version: 0.01
-  Moose::Autobox::Ref:
-    file: lib/Moose/Autobox/Ref.pm
-    version: 0.03
-  Moose::Autobox::SCALAR:
-    file: lib/Moose/Autobox.pm
-  Moose::Autobox::Scalar:
-    file: lib/Moose/Autobox/Scalar.pm
-    version: 0.01
-  Moose::Autobox::String:
-    file: lib/Moose/Autobox/String.pm
-    version: 0.02
-  Moose::Autobox::Undef:
-    file: lib/Moose/Autobox/Undef.pm
-    version: 0.01
-  Moose::Autobox::Value:
-    file: lib/Moose/Autobox/Value.pm
-    version: 0.01
-generated_by: Module::Build version 0.2808
-meta-spec:
-  url: http://module-build.sourceforge.net/META-spec-v1.2.html
-  version: 1.2
+tests: t/*.t
+version: 0.07
