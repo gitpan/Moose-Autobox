@@ -1,6 +1,6 @@
 
 package Moose::Autobox;
-
+use 5.006;
 use strict;
 use warnings;
 
@@ -8,7 +8,7 @@ use Carp        qw(confess);
 use Scalar::Util ();
 use Moose::Util  ();
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 use base 'autobox';
 
@@ -127,7 +127,7 @@ means that if you want to add methods to a particular perl type
 
 instead of this:
 
-  sub SCALAR::bar { 42 
+  sub SCALAR::bar { 42 }
 
 as you would with vanilla autobox.
 
