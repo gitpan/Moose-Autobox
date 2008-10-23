@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 
-use Test::More tests => 64;
+use Test::More tests => 70;
 
 BEGIN {
     use_ok('Moose::Autobox');
@@ -23,6 +23,9 @@ ok($s->defined, '... got a defined value');
 
 eval $s->dump;
 is($VAR1, 5 , '... eval of SCALAR->dump works');
+
+eval $s->flatten;
+is($VAR1, 5 , '... eval of SCALAR->flatten works');
 
 eval $s->perl;
 is($s->perl, $s->dump, '... SCALAR->dump equals SCALAR->perl');
@@ -74,6 +77,10 @@ $a->map(sub { $_ + 2 }),
 '... got the right return value for map');
 
 is_deeply($a, [ 4, 2, 6, 78, 101, 2, 3 ], '... original value is unchanged');
+
+my $b = [1, 2, 3];
+$b->map(sub { $_++ } );
+is_deeply($b, [ 2, 3, 4 ], '... original value is changed');
 
 is_deeply(
 $a->reverse(),
@@ -191,6 +198,10 @@ is( $a->dump,
     $a->perl,
     '... the value is correctly dumped with perl()' );
 
+is([1, 2, 3, 4, 5]->any, 3, '... any correctly found a value');
+is([1, 1, 2, 3, 4, 5, 5]->one, 2, '... one correctly found one value');
+is([1, 1, 2, 3, 4, 5, 5]->none , 6, '... none correctly did not find any of a value');
+is([3, 3, 3]->all, 3, '... all correctly found all of a value');
 
 # Hash
 

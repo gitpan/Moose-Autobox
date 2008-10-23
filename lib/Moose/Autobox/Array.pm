@@ -3,7 +3,7 @@ use Moose::Role 'with';
 use Perl6::Junction;
 use Moose::Autobox;
 
-our $VERSION = '0.03';
+our $VERSION = '0.09';
 
 with 'Moose::Autobox::Ref',
      'Moose::Autobox::List',
@@ -121,26 +121,44 @@ sub flatten {
     @{$_[0]}
 }
 
+sub _flatten_deep { 
+	my @array = @_;
+	my $depth = CORE::pop @array;
+	--$depth if (defined($depth));
+	
+	CORE::map {
+		(ref eq 'ARRAY')
+			? (defined($depth) && $depth == -1) ? $_ : _flatten_deep( @$_, $depth )
+			: $_
+	} @array;
+
+}
+
+sub flatten_deep { 
+	my ($array, $depth) = @_;	
+	[ _flatten_deep(@$array, $depth) ];
+}
+
 ## Junctions
 
 sub all {
     my ($array) = @_;     
-    return Perl6::Junction::All->all(@$array);
+    return Perl6::Junction::all(@$array);
 }
 
 sub any {
     my ($array) = @_;     
-    return Perl6::Junction::Any->any(@$array);
+    return Perl6::Junction::any(@$array);
 }
 
 sub none {
     my ($array) = @_;     
-    return Perl6::Junction::None->none(@$array);
+    return Perl6::Junction::none(@$array);
 }
 
 sub one {
     my ($array) = @_; 
-    return Perl6::Junction::One->one(@$array);
+    return Perl6::Junction::one(@$array);
 }
 
 ## Print
@@ -196,6 +214,8 @@ This is a role to describe operations on the Array type.
 
 =item B<flatten>
 
+=item B<flatten_deep ($depth)>
+
 =back
 
 =head2 Indexed implementation
@@ -232,6 +252,24 @@ This is a role to describe operations on the Array type.
 
 =item B<grep (\&block)>
 
+Note that, in both the above, $_ is in scope within the code block, as well as 
+being passed as $_[0]. As per CORE::map and CORE::grep, $_ is an alias to 
+the list value, so can be used to to modify the list, viz:
+
+    use Moose::Autobox;
+
+    my $foo = [1, 2, 3]; 
+    $foo->map( sub {$_++} ); 
+    print $foo->dump;
+
+yields
+
+   $VAR1 = [
+             2,
+             3,
+             4
+           ];
+        
 =item B<reverse>
 
 =item B<sort (?\&block)>
