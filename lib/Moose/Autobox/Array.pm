@@ -3,7 +3,7 @@ use Moose::Role 'with';
 use Perl6::Junction;
 use Moose::Autobox;
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 with 'Moose::Autobox::Ref',
      'Moose::Autobox::List',
@@ -116,6 +116,25 @@ sub kv {
     my ($array) = @_;   
     $array->keys->map(sub { [ $_, $array->[$_] ] });
 }
+
+sub each {
+    my ($array, $sub) = @_;
+    for my $i (0 .. $#$array) {
+      $sub->($i, $array->[ $i ]);
+    }
+}
+
+sub each_key {
+    my ($array, $sub) = @_;
+    $sub->($_) for (0 .. $#$array);
+}
+
+sub each_value {
+    my ($array, $sub) = @_;
+    $sub->($_) for @$array;
+}
+
+# end indexed
 
 sub flatten {
     @{$_[0]}
@@ -233,6 +252,12 @@ This is a role to describe operations on the Array type.
 =item B<values>
 
 =item B<kv>
+
+=item B<each>
+
+=item B<each_key>
+
+=item B<each_value>
 
 =back
 

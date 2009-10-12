@@ -3,6 +3,7 @@ examples/tic_tac_toe.pl
 examples/units/bytes.pl
 examples/units/time.pl
 inc/Module/Install.pm
+inc/Module/Install/AutoManifest.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
 inc/Module/Install/ExtraTests.pm
@@ -38,5 +39,7 @@ t/005_string.t
 t/006_y_combinator.t
 t/007_base.t
 t/008_flatten.t
+t/009_number.t
+t/010_each.t
 xt/release/pod.t
 xt/release/pod_coverage.t

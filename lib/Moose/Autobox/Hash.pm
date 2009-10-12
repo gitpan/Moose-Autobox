@@ -1,7 +1,7 @@
 package Moose::Autobox::Hash;
 use Moose::Role 'with';
 
-our $VERSION = '0.09';
+our $VERSION = '0.10';
 
 with 'Moose::Autobox::Ref',
      'Moose::Autobox::Indexed';
@@ -62,7 +62,27 @@ sub kv {
 sub slice {
     my ($hash, $keys) = @_;
     return [ @{$hash}{@$keys} ];
-};
+}
+
+sub each {
+    my ($hash, $sub) = @_;
+    for my $key (CORE::keys %$hash) {
+      $sub->($key, $hash->{$key});
+    }
+}
+
+sub each_key {
+    my ($hash, $sub) = @_;
+    $sub->($_) for CORE::keys %$hash;
+}
+
+sub each_value {
+    my ($hash, $sub) = @_;
+    $sub->($_) for CORE::values %$hash;
+}
+
+
+# End Indexed
 
 sub print   { CORE::print %{$_[0]} }
 sub say     { CORE::print %{$_[0]}, "\n" }
@@ -123,6 +143,12 @@ Slices a hash but returns the keys and values as a new hashref.
 =item B<kv>
 
 =item B<slice>
+
+=item B<each>
+
+=item B<each_key>
+
+=item B<each_value>
 
 =back
 
