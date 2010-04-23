@@ -1,7 +1,7 @@
 package Moose::Autobox::Hash;
 use Moose::Role 'with';
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 with 'Moose::Autobox::Ref',
      'Moose::Autobox::Indexed';
@@ -81,6 +81,18 @@ sub each_value {
     $sub->($_) for CORE::values %$hash;
 }
 
+sub each_n_values {
+    my ($hash, $n, $sub) = @_;
+    my @keys = CORE::keys %$hash;
+    my $it = List::MoreUtils::natatime($n, @keys);
+
+    while (my @vals = $it->()) {
+        $sub->(@$hash{ @vals });
+    }
+
+    return;
+}
+
 
 # End Indexed
 
@@ -149,6 +161,8 @@ Slices a hash but returns the keys and values as a new hashref.
 =item B<each_key>
 
 =item B<each_value>
+
+=item B<each_n_values>
 
 =back
 

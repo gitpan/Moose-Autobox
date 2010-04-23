@@ -1,7 +1,7 @@
 package Moose::Autobox::Indexed;     
 use Moose::Role 'requires';
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 requires 'at';
 requires 'put';
@@ -10,7 +10,7 @@ requires 'keys';
 requires 'values'; 
 requires 'kv';
 requires 'slice';
-requires qw(each each_key each_value);
+requires qw(each each_key each_value each_n_values);
 
 1;
 

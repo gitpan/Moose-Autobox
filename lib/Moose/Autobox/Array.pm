@@ -3,7 +3,7 @@ use Moose::Role 'with';
 use Perl6::Junction;
 use Moose::Autobox;
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 with 'Moose::Autobox::Ref',
      'Moose::Autobox::List',
@@ -85,6 +85,14 @@ sub sort {
     [ CORE::sort { $sub->($a, $b) } @$array ]; 
 }    
 
+sub first {
+    $_[0]->[0];
+}
+
+sub last {
+    $_[0]->[$#{$_[0]}];
+}
+
 ## ::Indexed implementation
 
 sub at {
@@ -132,6 +140,17 @@ sub each_key {
 sub each_value {
     my ($array, $sub) = @_;
     $sub->($_) for @$array;
+}
+
+sub each_n_values {
+    my ($array, $n, $sub) = @_;
+    my $it = List::MoreUtils::natatime($n, @$array);
+
+    while (my @vals = $it->()) {
+        $sub->(@vals);
+    }
+
+    return;
 }
 
 # end indexed
@@ -235,6 +254,10 @@ This is a role to describe operations on the Array type.
 
 =item B<flatten_deep ($depth)>
 
+=item B<first>
+
+=item B<last>
+
 =back
 
 =head2 Indexed implementation
@@ -258,6 +281,8 @@ This is a role to describe operations on the Array type.
 =item B<each_key>
 
 =item B<each_value>
+
+=item B<each_n_values ($n, $callback)>
 
 =back
 

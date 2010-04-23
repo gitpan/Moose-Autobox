@@ -41,5 +41,7 @@ t/007_base.t
 t/008_flatten.t
 t/009_number.t
 t/010_each.t
+t/011_each_n_values.t
+t/012_first_last.t
 xt/release/pod.t
 xt/release/pod_coverage.t

@@ -1,12 +1,14 @@
 package Moose::Autobox::Scalar;
 use Moose::Role 'with';
 
-our $VERSION = '0.10';
+our $VERSION = '0.11';
 
 with 'Moose::Autobox::String',
      'Moose::Autobox::Number';     
 
 sub flatten { $_[0] }
+sub first { $_[0] }
+sub last  { $_[0] }
 sub print { CORE::print $_[0] }
 sub say   { CORE::print $_[0], "\n" }
 1;
@@ -42,6 +44,14 @@ Flattening a scalar just returns the scalar.  This means that you can say:
 
   # Given $input of 5, @array is (5);
   # Given $input of [ 5, 2, 0], @array is (5, 2, 0)
+
+=item B<first>
+
+As per flatten.
+
+=item B<last>
+
+As per flatten.
 
 =back
 
