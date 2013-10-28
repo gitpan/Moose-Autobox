@@ -7,7 +7,7 @@ use Syntax::Keyword::Junction::Any ();
 use Syntax::Keyword::Junction::None ();
 use Syntax::Keyword::Junction::One ();
 
-our $VERSION = '0.13';
+our $VERSION = '0.14';
 
 with 'Moose::Autobox::Ref',
      'Moose::Autobox::List',
@@ -310,7 +310,7 @@ This is a role to describe operations on the Array type.
 
 Note that, in both the above, $_ is in scope within the code block, as well as 
 being passed as $_[0]. As per CORE::map and CORE::grep, $_ is an alias to 
-the list value, so can be used to to modify the list, viz:
+the list value, so can be used to modify the list, viz:
 
     use Moose::Autobox;
 

@@ -3,8 +3,8 @@
    "author" : [
       "Stevan Little <stevan@iinteractive.com>"
    ],
-   "dynamic_config" : 0,
-   "generated_by" : "ExtUtils::MakeMaker version 6.6302, CPAN::Meta::Converter version 2.120921",
+   "dynamic_config" : 1,
+   "generated_by" : "ExtUtils::MakeMaker version 6.8, CPAN::Meta::Converter version 2.132830",
    "license" : [
       "perl_5"
    ],
@@ -22,13 +22,6 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "ExtUtils::MakeMaker" : "6.59",
-            "Test::Exception" : "0.21",
-            "Test::More" : "0.89"
-         }
-      },
-      "configure" : {
-         "requires" : {
             "ExtUtils::MakeMaker" : "0"
          }
       },
@@ -37,11 +30,22 @@
             "Moose" : "0.42",
             "Syntax::Keyword::Junction" : "0",
             "autobox" : "2.23",
-            "parent" : "0",
-            "perl" : "5.006"
+            "parent" : "0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::Exception" : "0.21",
+            "Test::More" : "0.89"
          }
       }
    },
    "release_status" : "stable",
-   "version" : "0.13"
+   "resources" : {
+      "repository" : {
+         "type" : "git",
+         "url" : "git://git.moose.perl.org/Moose-Autobox.git"
+      }
+   },
+   "version" : "0.14"
 }

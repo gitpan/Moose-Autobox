@@ -2,16 +2,6 @@ Changes
 examples/tic_tac_toe.pl
 examples/units/bytes.pl
 examples/units/time.pl
-inc/Module/Install.pm
-inc/Module/Install/AutoManifest.pm
-inc/Module/Install/Base.pm
-inc/Module/Install/Can.pm
-inc/Module/Install/ExtraTests.pm
-inc/Module/Install/Fetch.pm
-inc/Module/Install/Makefile.pm
-inc/Module/Install/Metadata.pm
-inc/Module/Install/Win32.pm
-inc/Module/Install/WriteAll.pm
 lib/Moose/Autobox.pm
 lib/Moose/Autobox/Array.pm
 lib/Moose/Autobox/Code.pm
@@ -28,9 +18,6 @@ lib/Moose/Autobox/Undef.pm
 lib/Moose/Autobox/Value.pm
 Makefile.PL
 MANIFEST			This list of files
-META.yml
-MYMETA.json
-MYMETA.yml
 README
 t/000_load.t
 t/001_basic.t
@@ -47,3 +34,5 @@ t/011_each_n_values.t
 t/012_first_last.t
 xt/release/pod.t
 xt/release/pod_coverage.t
+META.yml                                 Module YAML meta-data (added by MakeMaker)
+META.json                                Module JSON meta-data (added by MakeMaker)

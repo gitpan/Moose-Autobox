@@ -1,7 +1,7 @@
 package Moose::Autobox::String;
 use Moose::Role;
 
-our $VERSION = '0.13';
+our $VERSION = '0.14';
 
 with 'Moose::Autobox::Value';
 
@@ -84,7 +84,7 @@ This is equivalent to splitting on space.
 
 =item B<lines>
 
-This is equivalent to splitting on linelines.
+This is equivalent to splitting on newlines.
 
 =back
 
