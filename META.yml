@@ -23,5 +23,7 @@ requires:
   autobox: 2.23
   parent: 0
 resources:
-  repository: git://git.moose.perl.org/Moose-Autobox.git
-version: 0.14
+  repository: https://github.com/moose/Moose-Autobox.git
+version: 0.15
+x_bugtracker:
+  web: https://github.com/moose/Moose-Autobox/issues
